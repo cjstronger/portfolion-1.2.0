@@ -26,6 +26,11 @@ body{
     gap: 20px;
     margin: 10px;
     z-index: 2;
+    animation: opacity 1s ease-in-out
+}
+@keyframes opacity{
+    from{opacity: 0%};
+    to{opacity: 100%}
 }
 #navbar a:hover{
     opacity: 100%;
@@ -41,6 +46,10 @@ body{
     font-weight: 500;
     border-radius: 1000px;
     opacity: 75%;
+}
+.hide-nav{
+    opacity: 0%;
+    transition: 1s ease-in-out;
 }
 main{
     width: 90%;
@@ -63,6 +72,7 @@ main{
     flex-direction: column;
     line-height: 80%;
     font-size: 15vw;
+    margin-top: 200px;
 }
 
 #bio{
@@ -271,4 +281,5 @@ main{
 }
 .button{
     transition: transform .1s ease-out;
+    margin-bottom: 200px;
 }

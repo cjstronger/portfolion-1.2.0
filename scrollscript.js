@@ -19,22 +19,31 @@ const observerCallback = (entries) => {
 
 const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-// Assuming you have a list of elements to observe
+
+//Magnetic effect for the links buttons
 document.querySelectorAll('.hidden').forEach(hidden => {
   observer.observe(hidden);
 });
 
 let btn = document.querySelectorAll('.button').forEach(btn => {
   btn.addEventListener('mousemove',(e)=>{
-    let x = e.offsetX
-    let y = e.offsetY
-    let btnWidth = btn.clientWidth
-    let btnHeight = btn.clientHeight
-    let transX = (x - btnWidth/2)
-    let transY = (y - btnHeight/2)
-    btn.style.transform = `translateX(${transX}px) translateY(${transY}px)`
+    let pos = btn.getBoundingClientRect();
+    let x = e.pageX - pos.left - pos.width / 2;
+    let y = e.pageY - pos.top - pos.height / 2 -window.scrollY;
+    btn.children[0].style.transform = "translate(" + x *.3 + "px, " + y *.5 + "px)";
     btn.addEventListener('mouseout',(e)=>{
-      btn.style.transform = '';
+      btn.children[0].style.transform = "translate(0px, 0px)";
     })
   })
+})
+
+//Scroll modification to enable the nav bar to disappear when scrolling down and appear
+//when scrolling up.
+let lastScroll= 0;
+window.addEventListener('scroll', ()=>{
+  let scroll= window.scrollY;
+  if(scroll > 100 && scroll > lastScroll){
+    document.querySelector('#navbar').classList.add('hide-nav')
+  } else document.querySelector('#navbar').classList.remove('hide-nav')
+  lastScroll = scroll;
 })

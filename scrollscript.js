@@ -42,8 +42,12 @@ let btn = document.querySelectorAll('.button').forEach(btn => {
 let lastScroll= 0;
 window.addEventListener('scroll', ()=>{
   let scroll= window.scrollY;
-  if(scroll > 100 && scroll > lastScroll){
-    document.querySelector('#navbar').classList.add('hide-nav')
-  } else document.querySelector('#navbar').classList.remove('hide-nav')
+  let bottomOfViewport = window.innerHeight + scroll;
+  let docHeight = document.documentElement.scrollHeight;
+  if(scroll > 100 && scroll > lastScroll && docHeight - bottomOfViewport > 50){
+    document.querySelector('#navbar')
+    .classList.add('hide-nav')
+  } else document.querySelector('#navbar')
+  .classList.remove('hide-nav')
   lastScroll = scroll;
 })

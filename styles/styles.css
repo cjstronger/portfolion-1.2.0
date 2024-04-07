@@ -17,16 +17,17 @@ body{
     background-color: black;
 }
 #navbar{
-    position: fixed;
-    top:0;
-    right:0;
+    position: sticky;
+    top: 10px;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
     gap: 20px;
     margin: 10px;
     z-index: 2;
-    animation: opacity 1s ease-in-out
+    animation: opacity .5s ease-in-out;
+}
+.strong{
+    margin-right: auto;
 }
 @keyframes opacity{
     from{opacity: 0%};
@@ -34,6 +35,7 @@ body{
 }
 #navbar a:hover{
     opacity: 100%;
+    transform: scale(120%);
     transition: .3s ease-in-out;
 }
 #navbar a{
@@ -45,10 +47,14 @@ body{
     max-width: 150px;
     font-weight: 500;
     border-radius: 1000px;
-    opacity: 75%;
+    opacity: 75%
 }
 .hide-nav{
     opacity: 0%;
+    transition: 1s ease-in-out;
+}
+.show-nav{
+    opacity: 75%;
     transition: 1s ease-in-out;
 }
 main{

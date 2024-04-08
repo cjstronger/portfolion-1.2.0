@@ -79,9 +79,11 @@ main{
     line-height: 80%;
     font-size: 15vw;
     margin-top: 200px;
+    z-index: 0;
+    overflow: hidden;
+    cursor: default;
 }
-
-#bio{
+#army, #dha, #full-stack{
     font-size: 1.5vw;
     overflow: hidden;
     border-right: solid white .2vw;
@@ -89,14 +91,74 @@ main{
     margin-left: 10px;
     margin-right: 0px;
     width: 0;
-    animation-name: typing, blinking;
-    animation-duration: 4s, 1s;
-    animation-timing-function: steps(100, end), ease-in-out;
-    animation-fill-mode: forwards;
-    animation-delay: .5s, 4.5s;
-    animation-iteration-count: 1, infinite;
-    cursor: pointer;
+    cursor: default;
     font-family: Inconsolata;
+    z-index: 1;
+}
+#army{
+    animation-name: typing, backspace, disappear;
+    animation-duration: 2s, 1.5s;
+    animation-timing-function: steps(30, end), steps(5, end);
+    animation-fill-mode: forwards, forwards;
+    animation-delay: .5s, 3s, 3s;
+    animation-iteration-count: 1, 1;
+}
+ul{
+    list-style: none;
+}
+.bio-holder:hover li p{
+    animation-play-state: paused;
+}
+.drop-down ul{
+    position: absolute;
+    background-color: rgb(30, 30, 30);
+    font-size: 1.3vw;
+    width: 15vw;
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left: .6vw;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-15px);
+    transition-property: opacity, transform, visibility
+}
+.drop-down:hover ul{
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0px);
+}
+.drop-down ul{
+    transition-duration: .5s;
+    transition-timing-function: ease-in-out;
+}
+#dha{
+    animation-name: typing3, backspace, disappear;
+    animation-duration: 2s, 1.5s;
+    animation-timing-function: steps(30, end), steps(5, end);
+    animation-fill-mode: forwards, forwards;
+    animation-delay: 0s, 3s, 3s;
+    animation-iteration-count: 1, 1;
+}
+#full-stack{
+    animation-name: typing2, blinking;
+    animation-duration: 4s, 1s;
+    animation-timing-function: steps(100, end);
+    animation-fill-mode: forwards;
+    animation-delay: 0s, 4s;
+    animation-iteration-count: 1, infinite;
+}
+.gone{
+    display: none
+}
+@keyframes backspace{
+    from{width: 10vw}
+    to{width: 0%}
+}
+@keyframes disappear{
+    from{display: default}
+    to{display: none}
 }
 @keyframes slide-down{
     0%{
@@ -109,13 +171,21 @@ main{
         left: 0px;
     }
 }
+@keyframes typing2{
+    from{width: 0}
+    to{width: 71.5vw}
+}
 @keyframes typing{
     from{
         width: 0;
     }
     to{
-        width: 100%;
+        width: 14.1vw;
     }
+}
+@keyframes typing3{
+    from{width: 0}
+    to{width: 13.4vw}
 }
 @keyframes blinking{
     from{
@@ -174,23 +244,7 @@ main{
     grid-column: span 9;
     grid-row: span 2;
 }
-.project-tile.row2.firstbox{
-    background-color: rgb(12, 12, 12);
-    grid-column: span 3;
-}
-.project-tile.row2.secondbox{
-    background-color: rgb(12, 12, 12);
-    grid-column: span 3;
-}
-.project-tile.row2.thirdbox{
-    background-color: rgb(12, 12, 12);
-    grid-column: span 3;
-}
-.project-tile.row2.fourthbox{
-    background-color: rgb(12, 12, 12);
-    grid-column: span 3;
-}
-.project-tile.row2.fifthbox{
+.project-tile.row2.firstbox, .project-tile.row2.secondbox, .project-tile.row2.thirdbox, .project-tile.row2.fourthbox, .project-tile.row2.fifthbox{
     background-color: rgb(12, 12, 12);
     grid-column: span 3;
 }
@@ -251,23 +305,14 @@ main{
     .project-tile.row1.firstbox, .project-tile.row1.secondbox{
         grid-column: span 15;
     }
-    .project-tile.row2.firstbox, .project-tile.row2.thirdbox{
+    .project-tile.row2.firstbox, .project-tile.row2.thirdbox, .project-tile.row3.firstbox, .project-tile.row3.thirdbox{
         grid-column: span 8;
     }
-    .project-tile.row2.secondbox, .project-tile.row2.fourthbox{
+    .project-tile.row2.secondbox, .project-tile.row2.fourthbox, .project-tile.row2.fifthbox{
         grid-column: span 7;
-    }
-    .project-tile.row2.fifthbox{
-        grid-column: span 7;
-    }
-    .project-tile.row3.firstbox{
-        grid-column: span 8;
     }
     .project-tile.row3.secondbox{
         grid-row: span 3
-    }
-    .project-tile.row3.thirdbox{
-        grid-column:span 8;
     }
     a.show-animate{
         transition: 1.5s;

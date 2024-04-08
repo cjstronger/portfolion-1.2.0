@@ -51,3 +51,57 @@ window.addEventListener('scroll', ()=>{
   .classList.remove('hide-nav')
   lastScroll = scroll;
 })
+
+//Adding the ability to make typing elements appear after their predecessors animations are
+//finished.
+
+let dhaTimeout = {
+  id: null,
+  startTime: 0,
+  remainingTime: 5000,
+  isPaused: false
+}
+let stackTimeout = {
+  id: null,
+  startTime: 0,
+  remainingTime: 10000,
+  isPaused: false
+}
+
+function startTimeout(timeout, elementId){
+    timeout.isPaused = false;
+    timeout.startTime = Date.now();
+    timeout.id = setTimeout(() => {
+      const element = document.getElementById(elementId)
+      console.log('it got here')
+      element.classList.remove("gone")}, timeout.remainingTime)
+  }
+function pauseTimeout(timeout){
+  if(!timeout.isPaused && timeout.id){
+    clearTimeout(timeout.id)
+    timeout.isPaused = true;
+    timeout.startTime -= Date.now() - timeout.startTime
+    console.log('paused')
+    timeout.id = null
+  }
+}
+
+function onMouseEnter(){
+  pauseTimeout(stackTimeout)
+  pauseTimeout(dhaTimeout)
+}
+
+function onMouseLeave(){
+  startTimeout(stackTimeout)
+  startTimeout(dhaTimeout)
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll(".typing").forEach(element => {
+    element.addEventListener('mouseenter', onMouseEnter)
+    element.addEventListener('mouseleave', onMouseLeave)
+  })
+})
+
+startTimeout(stackTimeout, 'full-stack')
+startTimeout(dhaTimeout, 'dha')

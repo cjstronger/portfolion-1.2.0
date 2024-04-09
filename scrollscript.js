@@ -1,4 +1,3 @@
-
 const observerOptions = {
   root: null, // null means the viewport
   rootMargin: '0px', // Adjust margins to change the effective area
@@ -7,7 +6,6 @@ const observerOptions = {
 
 const observerCallback = (entries) => {
   entries.forEach(entry => {
-      console.log(entry)
     if (entry.isIntersecting) {
       // Target element is intersecting with the root's threshold
       entry.target.classList.add('show-animate');
@@ -69,39 +67,42 @@ let stackTimeout = {
 }
 
 function startTimeout(timeout, elementId){
+  if(timeout.isPaused){
     timeout.isPaused = false;
     timeout.startTime = Date.now();
     timeout.id = setTimeout(() => {
       const element = document.getElementById(elementId)
-      console.log('it got here')
-      element.classList.remove("gone")}, timeout.remainingTime)
+      if(element){
+        element.classList.remove("gone")  
+      } else { 
+        console.log(`Element not found, ${elementId}`)
+      }
+    }, timeout.remainingTime)
+  } else{
+      timeout.startTime = Date.now()
+      timeout.id = setTimeout(() => {
+        const element = document.getElementById(elementId)
+        if(element){
+          element.classList.remove("gone")
+        }
+      }, timeout.remainingTime)
+    }
   }
-function pauseTimeout(timeout){
-  if(!timeout.isPaused && timeout.id){
-    clearTimeout(timeout.id)
-    timeout.isPaused = true;
-    timeout.startTime -= Date.now() - timeout.startTime
-    console.log('paused')
-    timeout.id = null
-  }
-}
 
-function onMouseEnter(){
-  pauseTimeout(stackTimeout)
-  pauseTimeout(dhaTimeout)
-}
-
-function onMouseLeave(){
-  startTimeout(stackTimeout)
-  startTimeout(dhaTimeout)
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll(".typing").forEach(element => {
-    element.addEventListener('mouseenter', onMouseEnter)
-    element.addEventListener('mouseleave', onMouseLeave)
-  })
-})
 
 startTimeout(stackTimeout, 'full-stack')
 startTimeout(dhaTimeout, 'dha')
+
+//smooth scroll with lenis
+const lenis = new Lenis()
+
+lenis.on('scroll', (e) => {
+  console.log(e)
+})
+
+function raf(time) {
+  lenis.raf(time)
+  requestAnimationFrame(raf)
+}
+
+requestAnimationFrame(raf)

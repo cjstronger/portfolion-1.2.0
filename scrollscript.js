@@ -1,3 +1,18 @@
+//Loading animation load trigger
+let RLoader = document.getElementById('loading-right')
+let LLoader = document.getElementById('loading-left')
+let TLoader = document.getElementById('loading-top')
+let BLoader = document.getElementById('loading-bottom')
+window.addEventListener('load', function(){
+  setTimeout(function() {
+    LLoader.classList.add('loading-SlideL')
+    RLoader.classList.add('loading-SlideR')
+    TLoader.classList.add('loading-SlideT')
+    BLoader.classList.add('loading-SlideB')
+  }, 2500)
+})
+
+
 const observerOptions = {
   root: null, // null means the viewport
   rootMargin: '0px', // Adjust margins to change the effective area
@@ -94,6 +109,7 @@ startTimeout(stackTimeout, 'full-stack')
 startTimeout(dhaTimeout, 'dha')
 
 //smooth scroll with lenis
+
 const lenis = new Lenis()
 
 lenis.on('scroll', (e) => {

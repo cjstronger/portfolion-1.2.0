@@ -1,3 +1,14 @@
+//smooth scroll with lenis
+
+const lenis = new Lenis()
+
+function raf(time) {
+  lenis.raf(time)
+  requestAnimationFrame(raf)
+}
+
+requestAnimationFrame(raf)
+
 //Loading animation load trigger
 let RLoader = document.getElementById('loading-right')
 let LLoader = document.getElementById('loading-left')
@@ -12,6 +23,27 @@ window.addEventListener('load', function(){
   }, 2500)
 })
 
+let clint = document.getElementById('clint')
+window.addEventListener('load', function(){
+  this.setTimeout(function(){
+    clint.classList.add('name-animation')
+    strong.classList.add('name-animation-2')
+  }, 3500)
+})
+
+let buttons = document.getElementById('navbar')
+window.addEventListener('load', function(){
+  this.setTimeout(function(){
+    buttons.classList.add('nav-glide')
+  }, 5500)
+})
+
+let army = document.getElementById('army')
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    army.classList.add('opacity')
+  }, 5000)
+})
 
 const observerOptions = {
   root: null, // null means the viewport
@@ -58,10 +90,9 @@ window.addEventListener('scroll', ()=>{
   let bottomOfViewport = window.innerHeight + scroll;
   let docHeight = document.documentElement.scrollHeight;
   if(scroll > 100 && scroll > lastScroll && docHeight - bottomOfViewport > 50){
-    document.querySelector('#navbar')
-    .classList.add('hide-nav')
-  } else document.querySelector('#navbar')
-  .classList.remove('hide-nav')
+    buttons.classList.add('hide-nav')
+  } else 
+  buttons.classList.remove('hide-nav')
   lastScroll = scroll;
 })
 
@@ -71,16 +102,17 @@ window.addEventListener('scroll', ()=>{
 let dhaTimeout = {
   id: null,
   startTime: 0,
-  remainingTime: 5000,
+  remainingTime: 10000,
   isPaused: false
 }
 let stackTimeout = {
   id: null,
   startTime: 0,
-  remainingTime: 10000,
+  remainingTime: 15000,
   isPaused: false
 }
 
+window.addEventListener('load', function(){
 function startTimeout(timeout, elementId){
   if(timeout.isPaused){
     timeout.isPaused = false;
@@ -104,21 +136,6 @@ function startTimeout(timeout, elementId){
     }
   }
 
-
 startTimeout(stackTimeout, 'full-stack')
 startTimeout(dhaTimeout, 'dha')
-
-//smooth scroll with lenis
-
-const lenis = new Lenis()
-
-lenis.on('scroll', (e) => {
-  console.log(e)
 })
-
-function raf(time) {
-  lenis.raf(time)
-  requestAnimationFrame(raf)
-}
-
-requestAnimationFrame(raf)

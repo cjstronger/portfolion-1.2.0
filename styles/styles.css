@@ -38,7 +38,7 @@ body{
 #loading-left, #loading-right, #loading-bottom, #loading-top{
     z-index: 10;
     position: fixed;
-    background: #14a76c;
+    background: none;
 }
 #loading-left{
     height: 100%;
@@ -113,9 +113,6 @@ body{
     transform: scale(100%) translateY(-100px);
     transition-property: transform, opacity;
 }
-.strong{
-    margin-right: auto;
-}
 #navbar a:hover{
     transform: scale(120%);
 }
@@ -131,6 +128,24 @@ body{
     max-width: 150px;
     font-weight: 500;
     border-radius: 1000px;
+    align-items: center;
+    justify-content: center;
+}
+#sussy{
+    width: 5vw;
+    height: auto;
+    margin-right: auto;
+}
+#first-c{
+    stroke-dasharray: 645;
+    stroke-dashoffset: 100%;
+}
+.animated-stroke{
+    animation: drawstroke 2s forwards;
+}
+@keyframes drawstroke{
+    from{stroke-dashoffset: 100%}
+    to{stroke-dashoffset: 0%}
 }
 .hide-nav{
     opacity: 0%;
@@ -154,7 +169,7 @@ main{
     margin: 0 auto;
 }
 #welcome-section{
-    margin-top: 10vh
+    margin-top: 10vh;
 }
 .container{
     display: inline-block;
@@ -185,8 +200,13 @@ main{
     animation-fill-mode: forwards;
     animation-delay: .5s;
 }
-#clint{
-    padding-top: 10vh;
+.draw{
+    width: 40vw;
+    height: auto;
+    margin-top: -7vw;
+    margin-left: 5.7vw;
+    margin-bottom: -5vh;
+    display: flex;
 }
 @keyframes fade-down{
     from{opacity: 0;
@@ -267,6 +287,9 @@ ul{
 .gone{
     display: none
 }
+.skills{
+    color:#14a76c
+}
 @keyframes backspace{
     from{width: 10vw}
     to{width: 0%}
@@ -288,7 +311,7 @@ ul{
 }
 @keyframes typing2{
     from{width: 0}
-    to{width: 71.5vw}
+    to{width: 72vw}
 }
 @keyframes typing{
     from{
@@ -425,6 +448,9 @@ ul{
     }
     .show-animate.project-tile.row1.secondbox{
         transform: scale(100%) rotate(0deg);
+    }
+    .draw{
+        margin-bottom: -2.5vh;
     }
 }
 .button{

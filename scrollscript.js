@@ -9,6 +9,16 @@ function raf(time) {
 
 requestAnimationFrame(raf)
 
+// Loading the lottie first-name file
+
+var animation = bodymovin.loadAnimation({
+  container: document.getElementById('bm-first'),
+  renderer: 'svg',
+  loop: false,
+  autoplay: true,
+  path: 'first-name.json'
+})
+
 //Loading animation load trigger
 let RLoader = document.getElementById('loading-right')
 let LLoader = document.getElementById('loading-left')

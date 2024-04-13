@@ -187,6 +187,11 @@ main{
     cursor: default;
     margin-left: 5vw;
 }
+#bm-first{
+    margin-left: -130px;
+    margin-bottom: -140px;
+    
+}
 .name-animation{
     animation-name: fade-down;
     animation-duration: 1s;

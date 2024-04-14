@@ -9,16 +9,6 @@ function raf(time) {
 
 requestAnimationFrame(raf)
 
-// Loading the lottie first-name file
-
-var animation = bodymovin.loadAnimation({
-  container: document.getElementById('bm-first'),
-  renderer: 'svg',
-  loop: false,
-  autoplay: true,
-  path: 'first-name.json'
-})
-
 //Loading animation load trigger
 let RLoader = document.getElementById('loading-right')
 let LLoader = document.getElementById('loading-left')
@@ -33,12 +23,27 @@ window.addEventListener('load', function(){
   }, 2500)
 })
 
-let clint = document.getElementById('clint')
+// Loading the lottie files
+
 window.addEventListener('load', function(){
-  this.setTimeout(function(){
-    clint.classList.add('name-animation')
-    strong.classList.add('name-animation-2')
-  }, 3500)
+    var firstAnimation = bodymovin.loadAnimation({
+      container: document.getElementById('bm-first'),
+      renderer: 'svg',
+      loop: false,
+      autoplay: false,
+      path: 'first-name.json'
+    })
+    var lastAnimation = bodymovin.loadAnimation({
+      container: document.getElementById('bm-last'),
+      renderer: 'svg',
+      loop: false,
+      autoplay: false,
+      path: 'last-name.json'
+    })
+    setTimeout(() => {
+      lastAnimation.play()
+      firstAnimation.play()
+    }, 3500)
 })
 
 let buttons = document.getElementById('navbar')

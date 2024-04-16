@@ -9,6 +9,20 @@ function raf(time) {
 
 requestAnimationFrame(raf)
 
+let tl = gsap.timeline({
+  scrollTrigger: {
+    trigger: '.project-tile',
+    start: 'top center',
+    end: '40% center',
+    scrub: true,
+    markers: true
+  }
+})
+
+tl.to('.project-tile', {
+  x: 0
+})
+
 //Loading animation load trigger
 let RLoader = document.getElementById('loading-right')
 let LLoader = document.getElementById('loading-left')

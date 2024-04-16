@@ -334,7 +334,9 @@ ul{
     margin-top: 5px;
 }
 .project-tile{
+    transform: translateX(1980px);
     border-radius: 20px;
+    overflow: hidden;
 }
 .project-tile.row1.firstbox{
     background-color: rgb(12, 12, 12);

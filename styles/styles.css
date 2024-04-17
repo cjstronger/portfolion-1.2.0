@@ -35,6 +35,24 @@ body{
     background-color: black;
     overflow-x: hidden
 }
+#stussy{
+    position: fixed;
+    margin-top: -105vh;
+    margin-left: 19vw;
+    z-index: 20;
+    transform: scale(20%)
+}
+.stussy-move{
+    position: absolute !important;
+    animation-name: stussy-slide;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    animation-duration: .5s
+}
+@keyframes stussy-slide{
+    from{margin-left: 19vw; margin-top: -105vh; transform: scale(20%)}
+    to{margin-left: -12vw; margin-top: -90vh; transform: scale(15%)}
+}
 #loading-left, #loading-right, #loading-bottom, #loading-top{
     z-index: 10;
     position: fixed;
@@ -193,7 +211,7 @@ main{
     animation-duration: 2s, 1.5s;
     animation-timing-function: steps(30, end), steps(5, end);
     animation-fill-mode: forwards, forwards;
-    animation-delay: 5.5s, 8s, 8.03s;
+    animation-delay: 6.5s, 9s, 9.03s;
     animation-iteration-count: 1, 1;
 }
 .opacity{
@@ -418,11 +436,21 @@ ul{
     #bm-first{
         margin-left: -130px;
         margin-top: 0px;
+        transform: scale(100%)
     }
     #bm-last{
+        transform: scale(100%);
         margin-left: -40px;
         margin-top: -225px;
         margin-bottom: -90px
+    }
+    #stussy{
+        margin-left: 0;
+        margin-top: -40vh;
+    }
+    @keyframes stussy-slide{
+        from{margin-left: 0; margin-top: -40vh; transform: scale(20%)}
+        to{margin-left: -69vw; margin-top: -88vh; transform: scale(9%)}
     }
 }
 .button{

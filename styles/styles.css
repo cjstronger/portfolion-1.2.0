@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=Inconsolata:wght@200..900&display=swap');
+@font-face{
+    font-family: 'bdo';
+    src: url('BDO.ttf'); 
+}
 *{
     margin: 0;
     padding: 0;
-    font-family: Geologica;
+    font-family: bdo;
     box-sizing: border-box;
     color: white 
 }
@@ -28,9 +32,7 @@ html.lenis, html.lenis body {
     pointer-events: none;
   }
 /* lenis */
-:root{
-    --graydient: radial-gradient(rgb(20, 20, 20)60%, rgb(30, 30, 30));
-}
+
 body{
     background-color: black;
     overflow-x: hidden
@@ -51,7 +53,7 @@ body{
 }
 @keyframes stussy-slide{
     from{margin-left: 19vw; margin-top: -105vh; transform: scale(20%)}
-    to{margin-left: -12vw; margin-top: -90vh; transform: scale(15%)}
+    to{margin-left: -10.5vw; margin-top: -88vh; transform: scale(15%)}
 }
 #loading-left, #loading-right, #loading-bottom, #loading-top{
     z-index: 10;
@@ -84,7 +86,7 @@ body{
 .loading-SlideL, .loading-SlideR, .loading-SlideB, .loading-SlideT{
     animation-name: slide-left;
     animation-timing-function: ease-in-out;
-    animation-duration: 3s;
+    animation-duration: 1s;
     animation-fill-mode: forwards;
 }
 .loading-SlideR{
@@ -96,29 +98,52 @@ body{
 .loading-SlideB{
     animation-name: slide-down;
 }
+.loading-finishSl, .loading-finishSr, .loading-finishSd, .loading-finishSu{
+    animation-name: finish-sl;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    animation-duration: .5s
+}
+.loading-finishSr{
+    animation-name: finish-sr
+}
+.loading-finishSu{
+    animation-name: finish-su
+}
+.loading-finishSd{
+    animation-name: finish-sd;
+}
 @keyframes slide-down{
     0%{bottom: 0}
-    50%{bottom: -360px}
-    80%{bottom: -360px}
-    100%{bottom: -1000px}
+    100%{bottom: -360px}
 }
 @keyframes slide-up{
     0%{top: 0}
-    50%{top: -230px}
-    80%{top: -230px}
-    100%{top: -1000px}
+    100%{top: -230px}
 }
 @keyframes slide-left{
     0%{left: 0}
-    50%{left: -170px}
-    80%{left: -170px}
-    100%{left: -2000px}
+    100%{left: -170px}
 }
 @keyframes slide-right{
     0%{right: 0}
-    50%{right: -580px}
-    80%{right: -580px}
-    100%{right: -4850px}
+    100%{right: -580px}
+}
+@keyframes finish-sd{
+    from{bottom: -360px}
+    to{bottom: -1000px}
+}
+@keyframes finish-su{
+    from{top: -230px}
+    to{top: -1000px}
+}
+@keyframes finish-sl{
+    from{left: -170px}
+    to{left: -2000px}
+}
+@keyframes finish-sr{
+    from{right: -580px}
+    to{right: -4850px}
 }
 #navbar{
     position: sticky;
@@ -172,47 +197,27 @@ body{
     to{transform: translateY(0px)}
 }
 main{
-    width: 90%;
+    width: 80%;
     margin: 0 auto;
 }
 #welcome-section{
     margin-top: 10vh;
+    padding-bottom: 100px;
 }
 .container{
     display: inline-block;
     cursor: pointer;
 }
-#bm-first{
-    margin-left: -680px;
-    margin-top: -600px;
-    transform: scale(50%)
+
+.hero-container{
+    display: flex;
 }
-#bm-last{
-    margin-left: -440px;
-    margin-top: -1000px;
-    margin-bottom: -420px;
-    transform: scale(50%)
-}
-#army, #dha, #full-stack{
-    font-size: 1.5vw;
-    overflow: hidden;
-    border-right: solid white .2vw;
-    white-space: nowrap;
-    margin-left: 5.7vw;
-    margin-right: 0px;
-    width: 0;
-    cursor: default;
-    font-family: Inconsolata;
-    z-index: 1;
-}
-#army{
-    border: none;
-    animation-name: typing, backspace, disappear;
-    animation-duration: 2s, 1.5s;
-    animation-timing-function: steps(30, end), steps(5, end);
-    animation-fill-mode: forwards, forwards;
-    animation-delay: 6.5s, 9s, 9.03s;
-    animation-iteration-count: 1, 1;
+.hero-bio{
+    max-width: 30vw;
+    font-size: 3vh;
+    padding: 5vw;
+    background-color: rgb(15, 15, 15);
+    border-radius: 20px
 }
 .opacity{
     border-right: solid white .2vw !important;
@@ -246,25 +251,6 @@ ul{
 .drop-down ul{
     transition-duration: .5s;
     transition-timing-function: ease-in-out;
-}
-#dha{
-    animation-name: typing3, backspace, disappear;
-    animation-duration: 2s, 1.5s;
-    animation-timing-function: steps(30, end), steps(5, end);
-    animation-fill-mode: forwards, forwards;
-    animation-delay: 0s, 3s, 3s;
-    animation-iteration-count: 1, 1;
-}
-#full-stack{
-    animation-name: typing2, blinking;
-    animation-duration: 4s, 1s;
-    animation-timing-function: steps(100, end);
-    animation-fill-mode: forwards;
-    animation-delay: 0s, 4s;
-    animation-iteration-count: 1, infinite;
-}
-.gone{
-    display: none
 }
 .skills{
     color:#14a76c
@@ -367,7 +353,7 @@ ul{
     grid-row: span 4;
 }
 .project-tile.row2.firstbox{
-    background-color: #05386B;
+    background-color: rgb(12, 12, 12);
     grid-column: span 5;
     grid-row: span 4;
 }
@@ -377,80 +363,89 @@ ul{
 }
 #projects-title{
     margin-top: 10vh;
-    font-size: 1.5vw;
+    font-size: 3vh;
     margin-left: 10px;
+    margin-bottom: 20px;
 }
-.email{
-    border: solid white;
-    display: flex;
-    flex-direction: row;    
-    gap: 10px;
-    margin-top: 20vw;
-    margin-left: 10px;
-    margin-bottom: 20vw;
-    flex-grow: 0;
-    font-size: 5vw;
-    align-items: center;
-}
-.call{
-    font-size: 1.5vw;
-    margin-left: 10px;
-    display:flex;
+#contact-links{
+    margin-top: 10vh;
+    font-size: 4vw;
     margin-bottom: 10vh;
+}
+#contact-links li{
+    display: flex;
     align-items: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border: solid white;
+    width: 40%;
+    overflow: hidden;
 }
-.email h1, .call p{ 
-    margin: 0 auto;
-    text-align: center
+#contact-links li::before{
+    content: "";
+    width: 0%;
+    height: 15%;
+    background-color: #14a76c;
+    position: absolute;
+    transition-property: width;
+    transition-duration: .5s;
+    transition-timing-function: ease-in-out;
 }
-.call svg{
-    margin-right: 25px;
+#contact-links li:hover::before{
+    width: 40%;
 }
-#contact svg{
-    width: 5vw;
-    height: 5vh;
+#contact-links li:nth-child(-n+3){
+    border-bottom: none;
+}
+#contact-links li:hover{
+    color: black;
+    transform: scale(110%);
+    border-bottom: solid white;
 }
 @media only screen and (max-width: 1000px){
-    .project-tile.row1.firstbox, .project-tile.row1.secondbox, .project-tile.row2.firstbox{
-        grid-column: span 15;
-        grid-row: span 3 
+    #contact-links{
+        font-size: 7vw;
+        overflow: hidden;
     }
-    a.show-animate{
-        transition: 1.5s;
+    #contact-links li{
+        padding-top: 20px;
+        padding-bottom: 20px;
+        width: 65%;
     }
-    .project-tile.row1.firstbox{
-        transform: scale(0%) rotate(-70deg);
+    #contact-links li:hover::before{
+        width: 65%;
     }
-    .show-animate.project-tile.row1.firstbox{
-        transform: scale(100%) rotate(0deg);
+    .hero-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
-    .project-tile.row1.secondbox{
-        transform: scale(0%) rotate(70deg);
-    }
-    .show-animate.project-tile.row1.secondbox{
-        transform: scale(100%) rotate(0deg);
-    }
-    .draw{
-        margin-bottom: -2.5vh;
-    }
-    #bm-first{
-        margin-left: -130px;
-        margin-top: 0px;
-        transform: scale(100%)
-    }
-    #bm-last{
-        transform: scale(100%);
-        margin-left: -40px;
-        margin-top: -225px;
-        margin-bottom: -90px
+    .hero-bio{
+        max-width: 300px;
+        font-size: 12px;
     }
     #stussy{
         margin-left: 0;
         margin-top: -40vh;
     }
     @keyframes stussy-slide{
-        from{margin-left: 0; margin-top: -40vh; transform: scale(20%)}
-        to{margin-left: -69vw; margin-top: -88vh; transform: scale(9%)}
+        from{margin-left: 0; margin-top:-40vh; transform: scale(20%)}
+        to{margin-left: -30vw; margin-top: -71vh; transform: scale(9%)}
+    }
+    .project-tile.row1.firstbox{
+        background-color: rgb(12, 12, 12);
+        grid-column: span 15;
+        grid-row: span 3;
+    }
+    .project-tile.row1.secondbox{
+        background-color: rgb(12, 12, 12);
+        grid-column: span 15;
+        grid-row: span 3;
+    }
+    .project-tile.row2.firstbox{
+        background-color: rgb(12, 12, 12);
+        grid-column: span 15;
+        grid-row: span 3;
     }
 }
 .button{

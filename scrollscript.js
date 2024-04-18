@@ -9,13 +9,20 @@ function raf(time) {
 
 requestAnimationFrame(raf)
 
+window.onload = function(){
+  if('scrollRestoration' in history){
+    history.scrollRestoration = 'manual';
+  }
+  console.log('should be scrolling to the top')
+  window.scrollTo(0,0);
+}
+
 let tl = gsap.timeline({
   scrollTrigger: {
     trigger: '.project-tile',
     start: 'top center',
     end: '40% center',
-    scrub: true,
-    markers: false
+    scrub: true
   }
 })
 
@@ -35,6 +42,15 @@ window.addEventListener('load', function(){
     TLoader.classList.add('loading-SlideT')
     BLoader.classList.add('loading-SlideB')
   }, 3500)
+})
+
+window.addEventListener('load', function(){
+  this.setTimeout(function(){
+    LLoader.classList.add('loading-finishSl')
+    RLoader.classList.add('loading-finishSr')
+    TLoader.classList.add('loading-finishSu')
+    BLoader.classList.add('loading-finishSd')
+  }, 6500)
 })
 
 let stussyMove = document.getElementById('stussy')
@@ -59,15 +75,7 @@ window.addEventListener('load', function(){
       autoplay: false,
       path: 'first-name.json'
     })
-    var lastAnimation = bodymovin.loadAnimation({
-      container: document.getElementById('bm-last'),
-      renderer: 'svg',
-      loop: false,
-      autoplay: false,
-      path: 'last-name.json'
-    })
     setTimeout(() => {
-      lastAnimation.play()
       firstAnimation.play()
     }, 4500)
 })
@@ -122,48 +130,4 @@ window.addEventListener('scroll', ()=>{
   } else 
   buttons.classList.remove('hide-nav')
   lastScroll = scroll;
-})
-
-//Adding the ability to make typing elements appear after their predecessors animations are
-//finished.
-
-let dhaTimeout = {
-  id: null,
-  startTime: 0,
-  remainingTime: 11000,
-  isPaused: false
-}
-let stackTimeout = {
-  id: null,
-  startTime: 0,
-  remainingTime: 16000,
-  isPaused: false
-}
-
-window.addEventListener('load', function(){
-function startTimeout(timeout, elementId){
-  if(timeout.isPaused){
-    timeout.isPaused = false;
-    timeout.startTime = Date.now();
-    timeout.id = setTimeout(() => {
-      const element = document.getElementById(elementId)
-      if(element){
-        element.classList.remove("gone")  
-      } else { 
-        console.log(`Element not found, ${elementId}`)
-      }
-    }, timeout.remainingTime)
-  } else{
-      timeout.startTime = Date.now()
-      timeout.id = setTimeout(() => {
-        const element = document.getElementById(elementId)
-        if(element){
-          element.classList.remove("gone")
-        }
-      }, timeout.remainingTime)
-    }
-  }
-
-startTimeout(stackTimeout, 'full-stack')
-startTimeout(dhaTimeout, 'dha')
 })

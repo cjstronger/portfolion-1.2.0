@@ -19,14 +19,16 @@ window.onload = function(){
 
 let tl = gsap.timeline({
   scrollTrigger: {
-    trigger: '.project-tile',
-    start: 'top center',
-    end: '40% center',
-    scrub: true
+    trigger: '#projects',
+    start: 'top 200px',
+    end: '1200px bottom',
+    scrub: true, 
+    pin: true,
+    markers: true
   }
 })
 
-tl.to('.project-tile', {
+tl.to('#projects', {
   x: 0
 })
 

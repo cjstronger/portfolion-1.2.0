@@ -17,18 +17,32 @@ window.onload = function(){
   window.scrollTo(0,0);
 }
 
-let tl = gsap.timeline({
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to('#projects', {
+  ease: 'expoScale(.5,7,none)',
   scrollTrigger: {
     trigger: '#projects',
-    start: 'top 200px',
-    end: '1200px bottom',
-    scrub: true, 
-    pin: true,
-    markers: true
-  }
+    start: '-=800 10px',
+    end: '+=700',
+    markers: true,
+    scrub: true,
+  },
+  x: 800
 })
 
-tl.to('#projects', {
+gsap.fromTo('#projects', {
+  ease: 'expoScale(.5,7,none)',
+  x:800,
+},{
+  scrollTrigger:{
+    trigger: '#projects',
+    start: '-=100 10px',
+    end: '+=1500',
+    scrub: true,
+    pin: true,
+    markers: true,
+  },
   x: 0
 })
 

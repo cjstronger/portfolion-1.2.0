@@ -13,37 +13,91 @@ window.onload = function(){
   if('scrollRestoration' in history){
     history.scrollRestoration = 'manual';
   }
-  console.log('should be scrolling to the top')
   window.scrollTo(0,0);
 }
 
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.to('#projects', {
+gsap.fromTo('#projects', {
+  x: 1920 },{
   ease: 'expoScale(.5,7,none)',
   scrollTrigger: {
     trigger: '#projects',
-    start: '-=800 10px',
-    end: '+=700',
-    markers: true,
+    start: '-=900 10px',
+    end: '+=800',
     scrub: true,
   },
   x: 800
 })
 
 gsap.fromTo('#projects', {
+  x: 800 }, {
   ease: 'expoScale(.5,7,none)',
-  x:800,
-},{
   scrollTrigger:{
     trigger: '#projects',
     start: '-=100 10px',
     end: '+=1500',
     scrub: true,
     pin: true,
-    markers: true,
   },
   x: 0
+})
+let tl = new TimelineMax()
+  tl.from('#contact a', .5,{
+    ease: 'expoScale(.5,7,none)',
+    scrollTrigger: {
+      trigger: '#contact',
+      start: '-400 center',
+      end: '+=1000 bottom',
+      scrub: true,
+    },
+    stagger: {
+      each: .5,
+      from: 'start'
+    },
+    '--widthy': '100%',
+    x: -800,
+  })
+
+tl.from('.contact-text', {
+  ease: 'expoScale(.5,7,none)',
+  scrollTrigger: {
+    trigger: '#contact',
+    start: 'bottom bottom',
+    end: '+=300',
+    scrub: true,
+    pin: true,
+  },
+  y: -400 
+})
+
+tl.from(".hero-bio p", {
+  y: -20,
+  opacity: 0,
+  delay: 7,
+  stagger: {
+    each: .2,
+    from: 'start'
+  }
+})
+
+let navbar = document.getElementById('projecter')
+navbar.addEventListener('mousemove', ()=>{
+  console.log('should be cumming!!!!!!')
+  gsap.fromTo('#projecter',{ 
+  '--wider': 'defaultWidth'},{
+    '--wider': '3.3vw',
+    ease: 'expoScale(.5,7,none)',
+  })
+})
+navbar.addEventListener('mouseout', ()=>{
+  console.log('should be going away')
+  gsap.fromTo('#projecter',{
+  '--wider': '3.3vw'},{
+    '--wider': 'defaultWidth',
+    ease: 'expoScale(.5,7,none)',
+    overwrite: 'auto',
+  })
 })
 
 //Loading animation load trigger

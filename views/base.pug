@@ -1,0 +1,40 @@
+doctype html
+html
+    head
+        meta(name='viewport' content='width=device-width', initial-scale='1.0')
+        meta(charset='utf-8')
+        title= title 
+        link(rel="stylesheet" href="/styles/styles.css")
+    body(id='body')
+        div(id='loading-screen')
+            div(id='loading-left')
+            div(id='loading-right')
+            div(id='loading-top')
+            div(id='loading-bottom')
+        .background
+        nav(id='navbar')
+            a(id='projecter' href='#projects') projects
+            a(id="contactless" href='#contact') contact
+        main
+
+            block content
+
+            section(id='contact')
+                .links
+                    a.contact-links(href='https://github.com/cjstronger' target="_blank")
+                        span.slidingText Github
+                    a.contact-links(href='https://www.linkedin.com/in/clint-strong-334b06143/' target="_blank")
+                        span.slidingText LinkedIn
+                    a.contact-links(href='mailto:clintjstrong@gmail.com' target="_blank")
+                        span.slidingText Email Me
+                    a.contact-links.lastone(href='tel:+17323203663')
+                        span.slidingText Call/Message
+                p.contact-text
+                    <span>Hey, </span><br>feel free to reach out!<br>I love collaborating on projects <br class="hide-me">and I'm always open to new ideas.
+        script(src="https://unpkg.com/lenis@1.1.10/dist/lenis.min.js")
+        script(type="module" src="/js/index.js")
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js' integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer")
+        script(src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js")
+        script(src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js")

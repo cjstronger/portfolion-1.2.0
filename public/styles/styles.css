@@ -13,9 +13,12 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: bdo;
   box-sizing: border-box;
   color: white;
+  font-family: gilroy;
+}
+p {
+  font-family: bdo !important;
 }
 /* lenis */
 html.lenis,
@@ -175,6 +178,7 @@ body {
     right: -4850px;
   }
 }
+
 #navbar {
   position: sticky;
   top: 10px;
@@ -186,27 +190,53 @@ body {
   transform: scale(100%) translateY(-150px);
   transition-property: transform, opacity;
 }
+
 #navbar a:hover {
-  transform: scale(120%);
+  cursor: pointer;
 }
+
 #navbar a {
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
+  position: relative;
+  padding: 8px;
+  width: 90px;
+  height: 45px;
   text-align: center;
   text-decoration: none;
-  padding: 10px;
-  width: 15vw;
-  max-width: 150px;
-  font-weight: 500;
+  font-size: 20px;
   align-items: center;
   justify-content: center;
+  overflow: hidden !important;
 }
-#projecter::before {
-  content: "";
+.contact-btn::before {
+  content: "contact";
   position: absolute;
-  width: var(--wider, 0vw);
-  height: 1px;
-  background-color: white;
+  top: -30px;
+  left: 8px;
+}
+.contact-btn::after {
+  content: "contact";
+  position: absolute;
+  left: 8px;
+}
+.project-btn::before {
+  content: "projects";
+  position: absolute;
+  top: -30px;
+  left: 8px;
+}
+.project-btn::after {
+  content: "projects";
+  position: absolute;
+  left: 8px;
+}
+
+#navbar a:hover::before {
+  transform: translateY(38px);
+  transition: all 0.2s;
+}
+#navbar a:hover::after {
+  transform: translateY(38px);
+  transition: all 0.2s;
 }
 
 #bm-first {
@@ -236,12 +266,8 @@ body {
   }
 }
 main {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
-}
-#welcome-section {
-  margin-top: 10vh;
-  padding-bottom: 100px;
 }
 .container {
   display: inline-block;
@@ -251,12 +277,12 @@ main {
 .hero-container {
   display: flex;
   flex-direction: column;
+  margin-bottom: 50px;
 }
 .hero-bio {
   min-width: 36vw;
   font-size: 20px;
   padding: 10px 0px;
-  overflow: hidden;
 }
 .opacity {
   border-right: solid white 0.2vw !important;
@@ -292,31 +318,43 @@ ul {
   }
 }
 #projects {
-  display: grid;
-  grid-template-columns: repeat(15, 1fr);
-  grid-auto-rows: 180px;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
-  margin-top: 5px;
 }
 .project-tile {
-  border-radius: 20px;
+  border-radius: 30px;
   overflow: hidden;
+  background-color: rgb(20, 20, 20);
+  width: 95%;
+  height: 40vh;
+  text-decoration: none;
+  padding: 5px 20px;
+  display: flex;
+  justify-content: space-evenly;
+
+  transition-property: all;
+  transition-duration: 0.5s;
 }
-.project-tile.row1.firstbox {
-  background-color: rgb(15, 15, 15);
-  grid-column: span 5;
-  grid-row: span 4;
+.project-tile:hover {
+  border-radius: 200px;
+  height: 42vh;
+  width: 100%;
+  transition-property: all;
+  transition-duration: 0.5s;
 }
-.project-tile.row1.secondbox {
-  background-color: rgb(15, 15, 15);
-  grid-column: span 5;
-  grid-row: span 4;
+.project-number {
+  font-size: 200px;
 }
-.project-tile.row2.firstbox {
-  background-color: rgb(15, 15, 15);
-  grid-column: span 5;
-  grid-row: span 4;
+.project-split {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-items: center;
+  justify-content: center;
 }
+
 @keyframes opac {
   from {
     opacity: 100%;
@@ -326,7 +364,7 @@ ul {
   }
 }
 #projects-title {
-  margin-top: 10vh;
+  font-family: Gilroy;
   font-size: 25px;
   margin-left: 10px;
   margin-bottom: 20px;
@@ -428,18 +466,10 @@ ul {
     height: auto;
     margin-left: -20px;
   }
-
-  .project-tile.row1.firstbox {
-    grid-column: span 15;
-    grid-row: span 3;
-  }
-  .project-tile.row1.secondbox {
-    grid-column: span 15;
-    grid-row: span 3;
-  }
-  .project-tile.row2.firstbox {
-    grid-column: span 15;
-    grid-row: span 3;
+  .project-tile:hover {
+    border-radius: 40px;
+    transition-property: all;
+    transition-duration: 0.5s;
   }
 }
 .button {

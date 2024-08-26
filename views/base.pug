@@ -13,8 +13,8 @@ html
             div(id='loading-bottom')
         .background
         nav(id='navbar')
-            a(id='projecter' href='#projects') projects
-            a(id="contactless" href='#contact') contact
+            a.project-btn( onClick='document.querySelector("#projects").scrollIntoView({behavior: "smooth"}); return false;')
+            a.contact-btn( onClick='document.querySelector("#contact").scrollIntoView({behavior: "smooth"}); return false;')
         main
 
             block content

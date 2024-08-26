@@ -86,37 +86,9 @@ tl.from(".hero-bio p", {
   opacity: 0,
   delay: 2.5,
   stagger: {
-    each: 0.2,
+    each: 0.1,
     from: "start",
   },
-});
-
-let navbar = document.getElementById("projecter");
-navbar.addEventListener("mousemove", () => {
-  gsap.fromTo(
-    "#projecter",
-    {
-      "--wider": "defaultWidth",
-    },
-    {
-      "--wider": "3.3vw",
-      ease: "expoScale(.5,7,none)",
-    }
-  );
-});
-
-navbar.addEventListener("mouseout", () => {
-  gsap.fromTo(
-    "#projecter",
-    {
-      "--wider": "3.3vw",
-    },
-    {
-      "--wider": "defaultWidth",
-      ease: "expoScale(.5,7,none)",
-      overwrite: "auto",
-    }
-  );
 });
 
 //Loading animation load trigger
@@ -143,18 +115,14 @@ window.addEventListener("load", function () {
 });
 // Loading the lottie files
 
-window.addEventListener("load", function () {
-  var firstAnimation = bodymovin.loadAnimation({
-    container: document.getElementById("bm-first"),
-    renderer: "svg",
-    loop: false,
-    autoplay: false,
-    path: "../lottie/first-name.json",
-  });
-  setTimeout(() => {
-    firstAnimation.play();
-  }, 200);
+var firstAnimation = bodymovin.loadAnimation({
+  container: document.getElementById("bm-first"),
+  renderer: "svg",
+  loop: false,
+  autoplay: false,
+  path: "../lottie/first-name.json",
 });
+firstAnimation.play();
 
 let buttons = document.getElementById("navbar");
 window.addEventListener("load", function () {
@@ -162,13 +130,6 @@ window.addEventListener("load", function () {
     buttons.classList.add("nav-glide");
   }, 1500);
 });
-
-// let army = document.getElementById("army");
-// window.addEventListener("load", function () {
-//   setTimeout(function () {
-//     army.classList.add("opacity");
-//   }, 1000);
-// });
 
 const observerOptions = {
   root: null,

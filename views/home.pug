@@ -1,20 +1,25 @@
 extends base
 
+mixin project(href, number, title, description)
+    a.project-tile(href=href)
+        h1.project-number= number
+        .project-split
+            h1.project-title= title
+            p.project-description= description
+
+
 block content
     section(id='welcome-section')
         .hero-container
             div(id="bm-first")
             .hero-bio 
-                p I'm Clint Strong, full stack developer 
+                p I'm Clint Strong, a full stack developer 
                 p focused on Node, React, and Next.js.
                 p Army veteran as an IT specialist &lpar;25B&rpar;.
                 p Prior Defense Health Agency IT lead.
                 p Residing in Santa Barbara, California.
     h1(id='projects-title') Projects 
     section(id='projects')
-        a.project-tile.row1.firstbox.hidden
-            div Project1
-        a.project-tile.row1.secondbox.hidden
-            div Project2
-        a.project-tile.row2.firstbox.show-animate
-            div Project3
+        +project('/', 1, 'Rachel Noelle - eCommerce/Coaching site', 'NextJS application allowing my client to sell their own art as well as coaching programs. Features CRUD to a supabase backend, client emails, Oauthentication, user authorization, Stripe eccommerce with webhooks and more.')
+        +project('/', 2, 'This is my second project')
+        +project('/', 3, 'This is my third project')

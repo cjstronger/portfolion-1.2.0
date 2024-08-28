@@ -169,3 +169,16 @@ window.addEventListener("scroll", () => {
   } else buttons.classList.remove("hide-nav");
   lastScroll = scroll;
 });
+
+const video1 = document.getElementById("video1");
+video1.loop = true;
+video1.addEventListener("mouseenter", () => {
+  console.log("hello");
+  video1.play();
+});
+video1.addEventListener("mouseleave", () => {
+  video1.pause();
+  video1.currentTime = 0;
+});
+const video2 = document.getElementById("video2");
+const video3 = document.getElementById("video3");

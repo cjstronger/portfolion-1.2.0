@@ -1,11 +1,16 @@
 extends base
 
-mixin project(href, number, title, description)
-    a.project-tile(href=href)
+mixin project(href, number, title, description, id)
+    .project-tile
         h1.project-number= number
         .project-split
             h1.project-title= title
             p.project-description= description
+        a.site-link(href='#') Live Site 
+            span.arrow &rarr;
+        video.video(id=id width="600" height="300")
+            source(src='/movies/rachelnoelle.mp4' type='video/mp4')
+            
 
 
 block content
@@ -20,6 +25,6 @@ block content
                 p Residing in Santa Barbara, California.
     h1(id='projects-title') Projects 
     section(id='projects')
-        +project('/', 1, 'Rachel Noelle - eCommerce/Coaching site', 'NextJS application allowing my client to sell their own art as well as coaching programs. Features CRUD to a supabase backend, client emails, Oauthentication, user authorization, Stripe eccommerce with webhooks and more.')
-        +project('/', 2, 'This is my second project')
-        +project('/', 3, 'This is my third project')
+        +project('/', 1, 'Rachel Noelle - eCommerce/Coaching site', 'NextJS application allowing my client to sell their own art as well as coaching programs. Features CRUD to a supabase backend, client emails, Oauthentication, user authorization, Stripe eccommerce with webhooks and more.', "video1")
+        +project('/', 2, 'This is my second project', "Description to the second project", "video2")
+        +project('/', 3, 'This is my third project', "Description to the third project", "video3")

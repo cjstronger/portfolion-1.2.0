@@ -53,7 +53,7 @@ body {
 #loading-top {
   z-index: 10;
   position: fixed;
-  /* background: #14a76c; */
+  /* background: #00FF99; */
 }
 #loading-left {
   height: 100%;
@@ -197,8 +197,7 @@ body {
 
 #navbar a {
   position: relative;
-  padding: 8px;
-  width: 90px;
+  width: 100px;
   height: 45px;
   text-align: center;
   text-decoration: none;
@@ -206,28 +205,37 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden !important;
+  color: black !important;
+  background-color: white;
+  border-radius: 90px;
+  font-family: "bdo";
+}
+.project-btn {
+  background-color: #00ff99 !important;
 }
 .contact-btn::before {
   content: "contact";
   position: absolute;
-  top: -30px;
-  left: 8px;
+  top: -32px;
+  left: 12px;
 }
 .contact-btn::after {
   content: "contact";
   position: absolute;
-  left: 8px;
+  top: 6px;
+  left: 12px;
 }
 .project-btn::before {
   content: "projects";
   position: absolute;
-  top: -30px;
-  left: 8px;
+  top: -32px;
+  left: 11px;
 }
 .project-btn::after {
   content: "projects";
   position: absolute;
-  left: 8px;
+  top: 6px;
+  left: 11px;
 }
 
 #navbar a:hover::before {
@@ -326,20 +334,30 @@ ul {
   border-radius: 30px;
   overflow: hidden;
   background-color: rgb(20, 20, 20);
-  width: 95%;
+  width: 100%;
   height: 40vh;
   text-decoration: none;
   padding: 5px 20px;
   display: flex;
   justify-content: space-evenly;
-
+  align-items: center;
+  position: relative;
   transition-property: all;
   transition-duration: 0.5s;
 }
+.site-link {
+  font-size: x-large;
+  text-decoration: none;
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  background-color: #00ff99;
+  color: black !important;
+  border-radius: 90px;
+  padding: 10px;
+}
 .project-tile:hover {
   border-radius: 200px;
-  height: 42vh;
-  width: 100%;
   transition-property: all;
   transition-duration: 0.5s;
 }
@@ -353,6 +371,22 @@ ul {
   gap: 10px;
   justify-items: center;
   justify-content: center;
+}
+.video {
+  margin-left: -150px;
+}
+
+.site-link:hover .arrow {
+  display: inline-block;
+  transform: rotate(-45deg);
+  transition: all;
+  transition-duration: 0.2s;
+}
+
+.arrow {
+  color: black !important;
+  display: inline-block;
+  transition: transform 0.2s ease-in-out;
 }
 
 @keyframes opac {
@@ -412,7 +446,7 @@ ul {
   width: var(--widthy);
   height: 0%;
   width: 100%;
-  background-color: #14a76c;
+  background-color: #00ff99;
   position: absolute;
   transition-property: height;
   transition-duration: 0.2s;

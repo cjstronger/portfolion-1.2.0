@@ -298,6 +298,22 @@ main {
 ul {
   list-style: none;
 }
+
+.svg-title {
+  text-align: center;
+}
+.svgs {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 10px;
+}
+.svg {
+  width: 70px;
+  height: 70px;
+}
+
 @keyframes backspace {
   from {
     width: 10vw;
@@ -372,8 +388,9 @@ ul {
   justify-items: center;
   justify-content: center;
 }
-.video {
-  margin-left: -150px;
+
+.project-mobile {
+  display: flex;
 }
 
 .site-link:hover .arrow {
@@ -475,6 +492,27 @@ ul {
     border-width: 2px;
   }
 
+  #navbar a {
+    font-size: e 12px;
+    width: 60px;
+    height: 25px;
+  }
+
+  .contact-btn::before {
+    top: -14px;
+    left: 8px;
+  }
+
+  .contact-btn::after {
+    top: 3px;
+    left: 8px;
+  }
+
+  .project-btn::before {
+    top: -18px;
+    left: 6px;
+  }
+
   #contact p {
     font-size: 15px;
   }
@@ -500,10 +538,39 @@ ul {
     height: auto;
     margin-left: -20px;
   }
+
+  .project-number {
+    font-size: 100px;
+  }
+  .project-split {
+    gap: 5px;
+    font-size: 12px !important;
+  }
+  .project-tile {
+    height: 85vh;
+    overflow: scroll;
+    gap: 10px;
+  }
   .project-tile:hover {
     border-radius: 40px;
     transition-property: all;
     transition-duration: 0.5s;
+  }
+  .project-mobile {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .site-link {
+    font-size: 12px !important;
+    bottom: 20px !important;
+    right: 15px !important;
+  }
+  .video {
+    height: 450px;
+    width: 300px;
+    margin: 0 auto;
+    background-color: #00ff99;
+    border-radius: 20px;
   }
 }
 .button {

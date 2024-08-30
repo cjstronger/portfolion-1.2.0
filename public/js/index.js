@@ -171,9 +171,10 @@ window.addEventListener("scroll", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const videos = document.querySelectorAll("video.video");
+  const tiles = document.querySelectorAll(".project-tile");
 
-  videos.forEach((video) => {
+  tiles.forEach((tile) => {
+    const video = tile.querySelector(".video");
     video.pause();
     video.loop = true;
     video.addEventListener("click", () => {
@@ -185,13 +186,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    video.addEventListener("mouseover", () => {
+    tile.addEventListener("mouseenter", () => {
       if (video.paused) {
         video.play();
       }
     });
 
-    video.addEventListener("mouseout", () => {
+    tile.addEventListener("mouseleave", () => {
       if (!video.paused) {
         video.pause();
         video.currentTime = 0;

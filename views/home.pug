@@ -1,23 +1,21 @@
 extends base
 
-mixin project(href, number, title, description, id, svgs)
+mixin project(href, number, title, description, videoName, svgs)
     .project-tile
         h1.project-number= number
         .project-mobile
             .project-split
                 h1.project-title= title
                 p.project-description= description
-            video.video(id=id width="600" height="300" muted autoplay playsinline loop)
-                source(src='/movies/rachelnoelle.mp4' type='video/mp4')
-            if svgs
+            .project-split
                 h1.svg-title Tech
-                    .svgs
-                        each svg in svgs
-                            img.svg(src=svg)
+                .svgs
+                    each svg in svgs
+                        img.svg(src=svg)
         a.site-link(href='#') Live Site 
             span.arrow &rarr;
-            
-
+        video.video(height="500" width="800" muted autoplay playsinline)
+            source(src=`/videos/${videoName}` type="video/mp4")
 
 block content
     section(id='welcome-section')
@@ -31,6 +29,6 @@ block content
                 p Residing in Santa Barbara, California.
     h1(id='projects-title') Projects 
     section(id='projects')
-        +project('/', 1, 'Rachel Noelle - eCommerce/Coaching site', 'NextJS application allowing my client to sell their own art as well as coaching programs. Features CRUD to a supabase backend, client emails, OAuthentication, user authorization, Stripe eccommerce with webhooks and more.', "video1", ["/svgs/nextjs.svg", "/svgs/framer-motion.avif", "/svgs/tailwind.svg", "/svgs/supabase.svg"])
-        +project('/', 2, 'This is my second project', "Description to the second project", "video2")
-        +project('/', 3, 'This is my third project', "Description to the third project", "video3")
+        +project('/', 1, 'Rachel Noelle - eCommerce/Coaching site', 'NextJS application allowing my client to sell their own art as well as coaching programs. Features CRUD to a supabase backend, client emails, OAuthentication, user authorization, Stripe eccommerce with webhooks and more.', "rachelnoelle.mp4", ["/svgs/nextjs.svg", "/svgs/framer-motion.avif", "/svgs/tailwind.svg", "/svgs/supabase.svg"])
+        +project('/', 2, 'This is my second project', "Description to the second project", "rachelnoelle.mp4", ['/svgs/tailwind.svg'])
+        +project('/', 3, 'This is my third project', "Description to the third project", "rachelnoelle.mp4", ['/svgs/tailwind.svg'])

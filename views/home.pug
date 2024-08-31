@@ -1,21 +1,36 @@
 extends base
 
-mixin project(href, number, title, description, videoName, svgs)
+mixin skill(svg, name, description)
+    .skill-tile 
+        img.svg(src=svg)
+        .skill-split
+            h1.skill-name name
+            p.skill-description
+
+mixin project(href, number, name, project, type, description, videoName, svgs)
     .project-tile
-        h1.project-number= number
         .project-mobile
             .project-split
-                h1.project-title= title
-                p.project-description= description
-            .project-split
-                h1.svg-title Tech
-                .svgs
-                    each svg in svgs
-                        img.svg(src=svg)
-        a.site-link(href='#') Live Site 
-            span.arrow &rarr;
-        video.video(height="500" width="800" muted autoplay playsinline)
-            source(src=`/videos/${videoName}` type="video/mp4")
+                .project-number-container
+                    h1.project-number= `0${number}`
+            .project-splitter
+                .project-split
+                    h1.project-name= name
+                    p.project-project= project
+                    h1.project-type= type
+                    p.project-description= description
+                .project-split
+                    h1.svg-title Tech
+                    .svgs
+                        each svg in svgs
+                            img.svg(src=svg)
+        if videoName
+            video.video(height="500" width="800" muted autoplay playsinline)
+                source(src=`/videos/${videoName}` type="video/mp4")
+        if videoName 
+            video.mobile-video(height="500" width="800" muted autoplay playsinline loop)
+                source(src=`/videos/${videoName}` type="video/mp4")
+        a.site-link(href=href target="_blank") &rarr;
 
 block content
     section(id='welcome-section')
@@ -24,11 +39,13 @@ block content
             .hero-bio 
                 p I'm Clint Strong, a full stack developer 
                 p focused on Node, React, and Next.js.
-                p Army veteran as an IT specialist &lpar;25B&rpar;.
                 p Prior Defense Health Agency IT lead.
+                p Army veteran as an IT specialist &lpar;25B&rpar;.
                 p Residing in Santa Barbara, California.
+    h1 Skills
+    section(id='skills')
     h1(id='projects-title') Projects 
     section(id='projects')
-        +project('/', 1, 'Rachel Noelle - eCommerce/Coaching site', 'NextJS application allowing my client to sell their own art as well as coaching programs. Features CRUD to a supabase backend, client emails, OAuthentication, user authorization, Stripe eccommerce with webhooks and more.', "rachelnoelle.mp4", ["/svgs/nextjs.svg", "/svgs/framer-motion.avif", "/svgs/tailwind.svg", "/svgs/supabase.svg"])
-        +project('/', 2, 'This is my second project', "Description to the second project", "rachelnoelle.mp4", ['/svgs/tailwind.svg'])
-        +project('/', 3, 'This is my third project', "Description to the third project", "rachelnoelle.mp4", ['/svgs/tailwind.svg'])
+        +project('https://www.rachelnoelle.net', 1, 'Rachel Noelle', 'Proj - 01', 'eCommerce/Coaching', 'NextJS application allowing my client to sell their own art as well as coaching programs. Features CRUD to a supabase backend, client emails, OAuthentication, user authorization, Stripe eccommerce with webhooks and more.', "rachelnoelle.mp4", ["/svgs/nextjs.svg", "/svgs/framer-motion.avif", "/svgs/tailwind.svg", "/svgs/supabase.svg"])
+        +project('/', 2, 'Name', 'Proj - 02', 'Type', "Description to the second project", "", ['/svgs/tailwind.svg'])
+        +project('/', 3, 'Name', 'Proj - 03', 'Type', "Description to the third project", "", ['/svgs/tailwind.svg'])

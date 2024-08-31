@@ -5,12 +5,12 @@ html
         meta(charset='utf-8')
         title= title 
         link(rel="stylesheet" href="/styles/styles.css")
+        link(rel="icon" href="/favicon.png" type="image/png")
     body(id='body')
-        div(id='loading-screen')
-            div(id='loading-left')
-            div(id='loading-right')
-            div(id='loading-top')
-            div(id='loading-bottom')
+        div(id='loading')
+            .loading-percentage
+            .loading-bar-container
+                .loading-bar
         .background
         nav(id='navbar')
             a.project-btn( onClick='document.querySelector("#projects").scrollIntoView({behavior: "smooth"}); return false;')

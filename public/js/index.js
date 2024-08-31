@@ -1,14 +1,29 @@
-const lenis = new Lenis();
+function disableScroll() {
+  document.body.style.overflow = "hidden";
+}
 
-gsap.registerPlugin(ScrollTrigger);
+disableScroll();
 
-lenis.on("scroll", ScrollTrigger.update);
+// Function to enable scroll
+function enableScroll() {
+  document.body.style.overflow = "";
+}
 
-gsap.ticker.add((time) => {
-  lenis.raf(time * 1000);
+//Loading animation load trigger
+
+let loader = document.getElementById("loading");
+window.addEventListener("load", function () {
+  this.setTimeout(() => {
+    tl.to("#loading", {
+      duration: 1,
+      ease: "power4.out",
+      y: "100vh",
+      onComplete: () => {
+        loader.style.willChange = "auto";
+      },
+    });
+  }, 1500);
 });
-
-gsap.ticker.lagSmoothing(0);
 
 // window.onload = function () {
 //   if ("scrollRestoration" in history) {
@@ -59,7 +74,6 @@ tl.from("#contact a", 0.5, {
     start: "-400 center",
     end: "+=1000 bottom",
     scrub: true,
-    markers: true,
   },
   stagger: {
     each: 0.5,
@@ -81,54 +95,98 @@ tl.from(".contact-text", {
   y: -400,
 });
 
-tl.from(".hero-bio p", {
-  y: -20,
-  opacity: 0,
-  delay: 2.5,
-  stagger: {
-    each: 0.1,
-    from: "start",
-  },
-});
+// tl.from(".hero-bio p", {
+//   y: -20,
+//   opacity: 0,
+//   stagger: {
+//     each: 0.1,
+//     from: "start",
+//   },
+// });
 
-//Loading animation load trigger
-let RLoader = document.getElementById("loading-right");
-let LLoader = document.getElementById("loading-left");
-let TLoader = document.getElementById("loading-top");
-let BLoader = document.getElementById("loading-bottom");
-window.addEventListener("load", function () {
-  setTimeout(function () {
-    LLoader.classList.add("loading-SlideL");
-    RLoader.classList.add("loading-SlideR");
-    TLoader.classList.add("loading-SlideT");
-    BLoader.classList.add("loading-SlideB");
-  }, 400);
-});
-
-window.addEventListener("load", function () {
-  this.setTimeout(function () {
-    LLoader.classList.add("loading-finishSl");
-    RLoader.classList.add("loading-finishSr");
-    TLoader.classList.add("loading-finishSu");
-    BLoader.classList.add("loading-finishSd");
-  }, 1800);
-});
 // Loading the lottie files
 
-var firstAnimation = bodymovin.loadAnimation({
-  container: document.getElementById("bm-first"),
-  renderer: "svg",
-  loop: false,
-  autoplay: false,
-  path: "../lottie/first-name.json",
+document.addEventListener("DOMContentLoaded", () => {
+  const resources = performance.getEntriesByType("resource");
+  let totalBytes = 0;
+  let loadedBytes = 0;
+
+  // Calculate total size of all resources
+  resources.forEach((resource) => {
+    totalBytes += resource.encodedBodySize; // transferSize gives you the actual size of the downloaded resource
+  });
+
+  // Update progress based on loaded bytes
+  const updateProgress = (loadedSize) => {
+    loadedBytes += loadedSize;
+    const percentage = Math.round((loadedBytes / totalBytes) * 100);
+    const loadingBar = document.getElementsByClassName("loading-bar")[0];
+    const loadingPercentage =
+      document.getElementsByClassName("loading-percentage")[0];
+    loadingPercentage.innerHTML = percentage;
+    loadingBar.style.setProperty("--width", `${percentage}%`);
+    console.log(`Loading: ${percentage}%`);
+  };
+
+  resources.forEach((resource) => {
+    // Ignore resources with 0 transfer size
+    if (resource.encodedBodySize > 0) {
+      const element = document.createElement("img");
+      element.src = resource.name;
+
+      element.onload = () => {
+        updateProgress(resource.encodedBodySize);
+      };
+
+      element.onerror = () => {
+        updateProgress(resource.encodedBodySize); // Consider errors as "loaded"
+      };
+    }
+  });
+
+  // Final check when all resources are loaded
+  window.onload = () => {
+    console.log("Loading complete: 100%");
+  };
 });
-firstAnimation.play();
+
+window.addEventListener("load", function () {
+  var firstAnimation = bodymovin.loadAnimation({
+    container: document.getElementById("bm-first"),
+    renderer: "svg",
+    loop: false,
+    autoplay: false,
+    path: "../lottie/first-name.json",
+  });
+  this.setTimeout(() => {
+    enableScroll();
+    firstAnimation.play();
+    const lenis = new Lenis();
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+  }, 2000);
+});
 
 let buttons = document.getElementById("navbar");
 window.addEventListener("load", function () {
   this.setTimeout(function () {
+    tl.to(".hero-bio p", {
+      y: 0,
+      opacity: 1,
+      stagger: {
+        each: 0.1,
+        from: "start",
+      },
+    });
     buttons.classList.add("nav-glide");
-  }, 1500);
+  }, 3500);
 });
 
 const observerOptions = {
@@ -175,6 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   tiles.forEach((tile) => {
     const video = tile.querySelector(".video");
+    if (!video) return;
     video.pause();
     video.loop = true;
     video.addEventListener("click", () => {

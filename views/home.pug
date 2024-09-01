@@ -1,29 +1,38 @@
 extends base
 
-mixin skill(svg, name, description)
-    .skill-tile 
-        img.svg(src=svg)
-        .skill-split
-            h1.skill-name name
-            p.skill-description
+mixin skill(name, description, year)
+    .skill-tile
+        h1.skill-name= name
+        h1.skill-year= year
+        p.skill-description= description
 
-mixin project(href, number, name, project, type, description, videoName, svgs)
+mixin project(href, number, name, project, type, description, videoName, tech)
     .project-tile
         .project-mobile
             .project-split
                 .project-number-container
                     h1.project-number= `0${number}`
+                    .reveal-overlay
             .project-splitter
                 .project-split
-                    h1.project-name= name
-                    p.project-project= project
-                    h1.project-type= type
-                    p.project-description= description
-                .project-split
-                    h1.svg-title Tech
-                    .svgs
-                        each svg in svgs
-                            img.svg(src=svg)
+                    .hero-div
+                        h1.project-name= name
+                        .reveal-overlay
+                    .hero-div
+                        p.project-project= project
+                        .reveal-overlay
+                    .hero-div
+                        h1.project-type= type
+                        .reveal-overlay
+                    .hero-div
+                        p.project-description= description
+                        .reveal-overlay
+                .project-skill
+                    .hero-div
+                        h1.tech-title Tech
+                        .reveal-overlay
+                        each skill in tech
+                            p.skill= `/${skill}/`
         if videoName
             video.video(height="500" width="800" muted autoplay playsinline)
                 source(src=`/videos/${videoName}` type="video/mp4")
@@ -36,16 +45,39 @@ block content
     section(id='welcome-section')
         .hero-container
             div(id="bm-first")
-            .hero-bio 
-                p I'm Clint Strong, a full stack developer 
-                p focused on Node, React, and Next.js.
-                p Prior Defense Health Agency IT lead.
-                p Army veteran as an IT specialist &lpar;25B&rpar;.
-                p Residing in Santa Barbara, California.
+            .hero-bio
+                .hero-div 
+                    p I'm Clint Strong, a full stack developer 
+                    .hero-bio-overlay
+                .hero-div
+                    p focused on Node, React, Next and Python.
+                    .hero-bio-overlay
+                .hero-div
+                    p Prior Defense Health Agency IT lead.
+                    .hero-bio-overlay
+                .hero-div 
+                    p Army veteran as an IT specialist &lpar;25B&rpar;.
+                    .hero-bio-overlay
+                .hero-div  
+                    p Residing in Santa Barbara, California.
+                    .hero-bio-overlay
     h1 Skills
-    section(id='skills')
+    section.skills
+        +skill('html', '.+.', '90')
+        +skill('css', '..+++.', '96')
+        +skill('javascript', '....++.', '95')
+        +skill('tailwind', 'Best thing since sliced bread, regular css makes me want to -REDACTED-', '17')
+        +skill('react', ':O', '13')
+        +skill('next', 'Fast and easy front and backend applications', '16')
+        +skill('node', 'npm run dev', '09')
+        +skill('mongodb', 'noSQL, document database', '07')
+        +skill('mongoose', 'allows schema and models within mongodb', '11')
+        +skill('python', '......+....', '06')
+        +skill('gsap', 'green sock animtaion protocol, pretty animations', '08')
+        +skill('framer-motion', 'alternative to gsap', '19')
+        +skill('lottie', 'integrate complex after effects animations into JS', '17')
     h1(id='projects-title') Projects 
     section(id='projects')
-        +project('https://www.rachelnoelle.net', 1, 'Rachel Noelle', 'Proj - 01', 'eCommerce/Coaching', 'NextJS application allowing my client to sell their own art as well as coaching programs. Features CRUD to a supabase backend, client emails, OAuthentication, user authorization, Stripe eccommerce with webhooks and more.', "rachelnoelle.mp4", ["/svgs/nextjs.svg", "/svgs/framer-motion.avif", "/svgs/tailwind.svg", "/svgs/supabase.svg"])
-        +project('/', 2, 'Name', 'Proj - 02', 'Type', "Description to the second project", "", ['/svgs/tailwind.svg'])
-        +project('/', 3, 'Name', 'Proj - 03', 'Type', "Description to the third project", "", ['/svgs/tailwind.svg'])
+        +project('https://www.rachelnoelle.net', 1, 'Rachel Noelle', 'Proj - 01', 'eCommerce/Coaching', 'NextJS application allowing my client to sell their own art as well as coaching programs. Features CRUD to a supabase backend, client emails, OAuthentication, user authorization, Stripe eccommerce with webhooks and more.', "rachelnoelles.mp4", ["next.js", "framer.motion", "tailwind.css", "supabase"])
+        +project('/', 2, 'Name', 'Proj - 02', 'Type', "Description to the second project", "", ['tailwind.css'])
+        +project('/', 3, 'Name', 'Proj - 03', 'Type', "Description to the third project", "", ['tailwind.css'])

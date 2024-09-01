@@ -9,103 +9,6 @@ function enableScroll() {
   document.body.style.overflow = "";
 }
 
-//Loading animation load trigger
-
-let loader = document.getElementById("loading");
-window.addEventListener("load", function () {
-  this.setTimeout(() => {
-    tl.to("#loading", {
-      duration: 1,
-      ease: "power4.out",
-      y: "100vh",
-      onComplete: () => {
-        loader.style.willChange = "auto";
-      },
-    });
-  }, 1500);
-});
-
-// window.onload = function () {
-//   if ("scrollRestoration" in history) {
-//     history.scrollRestoration = "manual";
-//   }
-//   window.scrollTo(0, 0);
-// };
-
-// gsap.fromTo(
-//   "#projects",
-//   {
-//     x: 1920,
-//   },
-//   {
-//     ease: "expoScale(.5,7,none)",
-//     scrollTrigger: {
-//       trigger: "#projects",
-//       start: "-=900 10px",
-//       end: "+=800",
-//       scrub: true,
-//     },
-//     x: 800,
-//   }
-// );
-
-// gsap.fromTo(
-//   "#projects",
-//   {
-//     x: 800,
-//   },
-//   {
-//     ease: "expoScale(.5,7,none)",
-//     scrollTrigger: {
-//       trigger: "#projects",
-//       start: "-=100 10px",
-//       end: "+=1500",
-//       scrub: true,
-//       pin: true,
-//     },
-//     x: 0,
-//   }
-// );
-let tl = gsap.timeline();
-tl.from("#contact a", 0.5, {
-  ease: "expoScale(.5,7,none)",
-  scrollTrigger: {
-    trigger: "#contact",
-    start: "-400 center",
-    end: "+=1000 bottom",
-    scrub: true,
-  },
-  stagger: {
-    each: 0.5,
-    from: "start",
-  },
-  "--widthy": "100%",
-  x: -800,
-});
-
-tl.from(".contact-text", {
-  ease: "expoScale(.5,7,none)",
-  scrollTrigger: {
-    trigger: "#contact",
-    start: "bottom bottom",
-    end: "+=300",
-    scrub: true,
-    pin: true,
-  },
-  y: -400,
-});
-
-// tl.from(".hero-bio p", {
-//   y: -20,
-//   opacity: 0,
-//   stagger: {
-//     each: 0.1,
-//     from: "start",
-//   },
-// });
-
-// Loading the lottie files
-
 document.addEventListener("DOMContentLoaded", () => {
   const resources = performance.getEntriesByType("resource");
   let totalBytes = 0;
@@ -129,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   resources.forEach((resource) => {
-    // Ignore resources with 0 transfer size
     if (resource.encodedBodySize > 0) {
       const element = document.createElement("img");
       element.src = resource.name;
@@ -144,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Final check when all resources are loaded
   window.onload = () => {
     console.log("Loading complete: 100%");
   };
@@ -174,41 +75,128 @@ window.addEventListener("load", function () {
   }, 2000);
 });
 
-let buttons = document.getElementById("navbar");
+//Loading animation load trigger
+
+let loaderTl = gsap.timeline();
+let loader = document.getElementById("loading");
 window.addEventListener("load", function () {
-  this.setTimeout(function () {
-    tl.to(".hero-bio p", {
-      y: 0,
-      opacity: 1,
+  this.setTimeout(() => {
+    loaderTl.to("#loading", {
+      duration: 1,
+      ease: "power4.out",
+      y: "100vh",
+      onComplete: () => {
+        loader.style.willChange = "auto";
+      },
+    });
+  }, 1500);
+});
+
+// window.onload = function () {
+//   if ("scrollRestoration" in history) {
+//     history.scrollRestoration = "manual";
+//   }
+//   window.scrollTo(0, 0);
+// };
+document.addEventListener("DOMContentLoaded", () => {
+  let tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#contact",
+      start: "-100 center",
+      onEnter: () => tl.restart(true),
+      onLeaveBack: () => tl.restart(true),
+    },
+  });
+  tl.from(".contact-text", {
+    ease: "expoScale(.5,7,none)",
+    y: -500,
+  });
+
+  tl.from("#contact a", 0.15, {
+    ease: "expoScale(.5,7,none)",
+    stagger: {
+      each: 0.15,
+      from: "start",
+    },
+    "--widthy": "100%",
+    x: -800,
+  });
+
+  const overlays = Array.from(
+    document.getElementsByClassName("reveal-overlay")
+  );
+
+  overlays.forEach((overlay) => (overlay.style.transformOrigin = "0% 100%"));
+
+  const elements = gsap.utils.toArray(".project-tile");
+
+  elements.forEach((element) => {
+    gsap.timeline(element, {
+      scrollTrigger: {
+        trigger: element,
+        start: "bottom center",
+        markers: true,
+      },
+    });
+    gsap.to(overlays, {
+      duration: 0.5,
+      scaleX: 0,
+      ease: "power2.out",
       stagger: {
-        each: 0.1,
+        each: 0.18,
+      },
+    });
+    gsap.from(
+      ".project-name, .project-skill, .project-description, .project-project, .project-type, .project-number",
+      {
+        y: 40,
+        duration: 0.35,
+        opacity: 0,
+        ease: "power2.out",
+        stagger: {
+          each: 0.15,
+        },
+      }
+    );
+  });
+});
+
+window.addEventListener("DOMContentLoaded", function () {
+  const overlays = Array.from(
+    document.getElementsByClassName("hero-bio-overlay")
+  );
+  const buttons = document.getElementById("navbar");
+
+  overlays.forEach((overlay) => (overlay.style.transformOrigin = "0% 100%"));
+  this.setTimeout(function () {
+    gsap.to(overlays, {
+      duration: 0.5,
+      scaleX: 0,
+      ease: "power2.out",
+      stagger: {
+        each: 0.18,
+      },
+    });
+    gsap.from(".hero-div p", {
+      y: 30,
+      duration: 0.35,
+      opacity: 0,
+      delay: 0.2,
+      ease: "power2.out",
+      stagger: {
+        each: 0.2,
         from: "start",
       },
     });
     buttons.classList.add("nav-glide");
-  }, 3500);
+  }, 4000);
 });
 
-const observerOptions = {
-  root: null,
-  rootMargin: "0px",
-  threshold: 1.0,
-};
-
-const observerCallback = (entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show-animate");
-    } else {
-    }
-  });
-};
-
-const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-//Magnetic effect for the links buttons
-document.querySelectorAll(".hidden").forEach((hidden) => {
-  observer.observe(hidden);
+const skills = document.getElementsByClassName("skill-year");
+const skillArray = Array.from(skills);
+skillArray.forEach((skill) => {
+  const randomPercentage = parseInt(Math.random().toFixed(2) * 100);
+  skill.style.setProperty("--translate", `${randomPercentage}%`);
 });
 
 //Scroll modification to enable the nav bar to disappear when scrolling down and appear

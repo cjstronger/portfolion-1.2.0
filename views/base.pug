@@ -8,7 +8,14 @@ html
         link(rel="icon" href="/favicon.png" type="image/png")
     body(id='body')
         div(id='loading')
-            .loading-percentage
+            .loading-percentage-container
+                .loading-percentage 0%
+            .loading-percentage-container
+                .loading-percentage 25%
+            .loading-percentage-container
+                .loading-percentage 75%
+            .loading-percentage-container
+                .loading-percentage 100%
             .loading-bar-container
                 .loading-bar
         .background
@@ -22,15 +29,15 @@ html
             section(id='contact')
                 .links
                     a.contact-links(href='https://github.com/cjstronger' target="_blank")
-                        span.slidingText Github
+                        p.sliding-text Github
                     a.contact-links(href='https://www.linkedin.com/in/clint-strong-334b06143/' target="_blank")
-                        span.slidingText LinkedIn
+                        p.sliding-text LinkedIn
                     a.contact-links(href='mailto:clintjstrong@gmail.com' target="_blank")
-                        span.slidingText Email Me
+                        p.sliding-text Email
                     a.contact-links.lastone(href='tel:+17323203663')
-                        span.slidingText Call/Message
+                        p.sliding-text Call/Message
                 p.contact-text
-                    <span>Hey, </span><br>feel free to reach out!<br>I love collaborating on projects <br class="hide-me">and I'm always open to new ideas.
+                    <span class="main-font">Hey, </span><br>feel free to reach out!<br>I love collaborating on projects <br class="hide-me">and I'm always open to new ideas.
         script(src="https://unpkg.com/lenis@1.1.10/dist/lenis.min.js")
         script(type="module" src="/js/index.js")
         script(src='https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js' integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg=="

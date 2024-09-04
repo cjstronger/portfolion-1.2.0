@@ -4,54 +4,41 @@ function disableScroll() {
 
 disableScroll();
 
-// Function to enable scroll
 function enableScroll() {
   document.body.style.overflow = "";
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const resources = performance.getEntriesByType("resource");
-  let totalBytes = 0;
-  let loadedBytes = 0;
-
-  // Calculate total size of all resources
-  resources.forEach((resource) => {
-    totalBytes += resource.encodedBodySize; // transferSize gives you the actual size of the downloaded resource
-  });
-
-  // Update progress based on loaded bytes
-  const updateProgress = (loadedSize) => {
-    loadedBytes += loadedSize;
-    const percentage = Math.round((loadedBytes / totalBytes) * 100);
-    const loadingBar = document.getElementsByClassName("loading-bar")[0];
-    const loadingPercentage =
-      document.getElementsByClassName("loading-percentage")[0];
-    loadingPercentage.innerHTML = percentage;
-    loadingBar.style.setProperty("--width", `${percentage}%`);
-    console.log(`Loading: ${percentage}%`);
-  };
-
-  resources.forEach((resource) => {
-    if (resource.encodedBodySize > 0) {
-      const element = document.createElement("img");
-      element.src = resource.name;
-
-      element.onload = () => {
-        updateProgress(resource.encodedBodySize);
-      };
-
-      element.onerror = () => {
-        updateProgress(resource.encodedBodySize); // Consider errors as "loaded"
-      };
+const updateProgress = async () => {
+  const loadingBar = document.getElementsByClassName("loading-bar")[0];
+  const loadingPercentages =
+    document.getElementsByClassName("loading-percentage");
+  const percentagesArray = gsap.utils.toArray(loadingPercentages);
+  const buffer = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  for (const percentageNumber of percentagesArray) {
+    gsap.to(percentageNumber, 0.5, {
+      y: 0,
+      ease: "power2.out",
+    });
+    if (percentageNumber.innerHTML === "0%") {
+      await buffer(300);
+    } else {
+      await buffer(100);
     }
-  });
+    const percentageText = percentageNumber.innerHTML;
+    loadingBar.style.setProperty("--width", `${percentageText}`);
+    await buffer(300);
+    if (percentageNumber.innerHTML === "100%") return;
+    gsap.to(percentageNumber, 0.5, {
+      y: -700,
+      ease: "power2.out",
+      delay: 0.05,
+    });
+  }
+};
 
-  window.onload = () => {
-    console.log("Loading complete: 100%");
-  };
-});
+updateProgress();
 
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
   var firstAnimation = bodymovin.loadAnimation({
     container: document.getElementById("bm-first"),
     renderer: "svg",
@@ -60,8 +47,8 @@ window.addEventListener("load", function () {
     path: "../lottie/first-name.json",
   });
   this.setTimeout(() => {
-    enableScroll();
     firstAnimation.play();
+    enableScroll();
     const lenis = new Lenis();
 
     gsap.registerPlugin(ScrollTrigger);
@@ -72,6 +59,7 @@ window.addEventListener("load", function () {
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
+    ScrollTrigger.refresh();
   }, 2000);
 });
 
@@ -79,93 +67,32 @@ window.addEventListener("load", function () {
 
 let loaderTl = gsap.timeline();
 let loader = document.getElementById("loading");
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
   this.setTimeout(() => {
     loaderTl.to("#loading", {
-      duration: 1,
+      duration: 0.5,
       ease: "power4.out",
       y: "100vh",
       onComplete: () => {
         loader.style.willChange = "auto";
       },
     });
-  }, 1500);
+  }, 2200);
 });
 
-// window.onload = function () {
-//   if ("scrollRestoration" in history) {
-//     history.scrollRestoration = "manual";
-//   }
-//   window.scrollTo(0, 0);
-// };
-document.addEventListener("DOMContentLoaded", () => {
-  let tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#contact",
-      start: "-100 center",
-      onEnter: () => tl.restart(true),
-      onLeaveBack: () => tl.restart(true),
-    },
-  });
-  tl.from(".contact-text", {
-    ease: "expoScale(.5,7,none)",
-    y: -500,
-  });
+window.onload = function () {
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+  window.scrollTo(0, 0);
+};
 
-  tl.from("#contact a", 0.15, {
-    ease: "expoScale(.5,7,none)",
-    stagger: {
-      each: 0.15,
-      from: "start",
-    },
-    "--widthy": "100%",
-    x: -800,
-  });
-
-  const overlays = Array.from(
-    document.getElementsByClassName("reveal-overlay")
-  );
-
-  overlays.forEach((overlay) => (overlay.style.transformOrigin = "0% 100%"));
-
-  const elements = gsap.utils.toArray(".project-tile");
-
-  elements.forEach((element) => {
-    gsap.timeline(element, {
-      scrollTrigger: {
-        trigger: element,
-        start: "bottom center",
-        markers: true,
-      },
-    });
-    gsap.to(overlays, {
-      duration: 0.5,
-      scaleX: 0,
-      ease: "power2.out",
-      stagger: {
-        each: 0.18,
-      },
-    });
-    gsap.from(
-      ".project-name, .project-skill, .project-description, .project-project, .project-type, .project-number",
-      {
-        y: 40,
-        duration: 0.35,
-        opacity: 0,
-        ease: "power2.out",
-        stagger: {
-          each: 0.15,
-        },
-      }
-    );
-  });
-});
+const buttons = document.getElementById("navbar");
 
 window.addEventListener("DOMContentLoaded", function () {
   const overlays = Array.from(
     document.getElementsByClassName("hero-bio-overlay")
   );
-  const buttons = document.getElementById("navbar");
 
   overlays.forEach((overlay) => (overlay.style.transformOrigin = "0% 100%"));
   this.setTimeout(function () {
@@ -177,7 +104,7 @@ window.addEventListener("DOMContentLoaded", function () {
         each: 0.18,
       },
     });
-    gsap.from(".hero-div p", {
+    gsap.from(".hero-bio .hero-div p", {
       y: 30,
       duration: 0.35,
       opacity: 0,
@@ -192,11 +119,95 @@ window.addEventListener("DOMContentLoaded", function () {
   }, 4000);
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const elements = gsap.utils.toArray(".project-tile");
+
+  elements.forEach((element) => {
+    const numberOverlay = element.querySelector(".number-reveal-overlay");
+    const overlays = element.querySelectorAll(".reveal-overlay");
+    const name = element.querySelector(".project-name");
+    const skill = element.querySelector(".skills-list");
+    const tech = element.querySelector(".tech-title");
+    const description = element.querySelector(".project-description");
+    const project = element.querySelector(".project-project");
+    const type = element.querySelector(".project-type");
+    const number = element.querySelector(".project-number");
+    const elementsArray = [name, project, type, description, tech, skill];
+    numberOverlay.style.transformOrigin = "0% 100%";
+    overlays.forEach((overlay) => (overlay.style.transformOrigin = "0% 100%"));
+    const newTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: element,
+        start: "top center",
+      },
+    });
+    const secondTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: element,
+        start: "top center",
+      },
+    });
+    newTl.to(numberOverlay, {
+      duration: 0.5,
+      scaleX: 0,
+      ease: "power2.out",
+    });
+    secondTl.from(number, {
+      y: 40,
+      duration: 0.8,
+      opacity: 0,
+      delay: 0.15,
+      ease: "circ",
+    });
+    newTl.to(overlays, {
+      duration: 0.5,
+      scaleX: 0,
+      ease: "power2.out",
+      stagger: {
+        each: 0.18,
+      },
+    });
+    secondTl.from(elementsArray, {
+      y: 40,
+      duration: 0.35,
+      opacity: 0,
+      delay: -0.3,
+      ease: "power2.out",
+      stagger: {
+        each: 0.15,
+      },
+    });
+  });
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#contact",
+      start: "center bottom",
+    },
+  });
+  tl.from(".contact-text", 0.5, {
+    ease: "power2.out",
+    y: -500,
+  });
+
+  tl.from("#contact a", 0.5, {
+    ease: "power4.out",
+    stagger: {
+      each: 0.1,
+      from: "start",
+    },
+    x: -800,
+  });
+});
+
 const skills = document.getElementsByClassName("skill-year");
+const skillTitles = document.getElementsByClassName("skill-name");
 const skillArray = Array.from(skills);
-skillArray.forEach((skill) => {
+skillArray.forEach((skill, i) => {
   const randomPercentage = parseInt(Math.random().toFixed(2) * 100);
   skill.style.setProperty("--translate", `${randomPercentage}%`);
+  skill.style.setProperty("--translateY", `${randomPercentage * 3 + 250}%`);
+  skillTitles[i].style.setProperty("--translate", `${randomPercentage * 3}%`);
 });
 
 //Scroll modification to enable the nav bar to disappear when scrolling down and appear

@@ -6,13 +6,12 @@ mixin skill(name, description, year)
         h1.skill-year= year
         p.skill-description= description
 
-mixin project(href, number, name, project, type, description, videoName, tech)
+mixin project(href, number, name, project, type, description, videoName, mobileVideo, tech)
     .project-tile
         .project-mobile
-            .project-split
-                .project-number-container
-                    h1.project-number= `0${number}`
-                    .reveal-overlay
+            .number-div
+                h1.project-number= `0${number}`
+                .number-reveal-overlay
             .project-splitter
                 .project-split
                     .hero-div
@@ -31,14 +30,17 @@ mixin project(href, number, name, project, type, description, videoName, tech)
                     .hero-div
                         h1.tech-title Tech
                         .reveal-overlay
-                        each skill in tech
-                            p.skill= `/${skill}/`
+                        .skills-list
+                            each skill in tech
+                                .hero-div
+                                    p.skill= `/${skill}/`
+                                    .reveal-overlay
         if videoName
-            video.video(height="500" width="800" muted autoplay playsinline)
+            video.video(height="500" width="800" muted autoplay playsinline loading='lazy')
                 source(src=`/videos/${videoName}` type="video/mp4")
-        if videoName 
-            video.mobile-video(height="500" width="800" muted autoplay playsinline loop)
-                source(src=`/videos/${videoName}` type="video/mp4")
+        if mobileVideo
+            video.mobile-video(muted autoplay playsinline loop loading='lazy')
+                source(src=`/videos/${mobileVideo}` type="video/mp4")
         a.site-link(href=href target="_blank") &rarr;
 
 block content
@@ -74,10 +76,10 @@ block content
         +skill('mongoose', 'allows schema and models within mongodb', '11')
         +skill('python', '......+....', '06')
         +skill('gsap', 'green sock animtaion protocol, pretty animations', '08')
-        +skill('framer-motion', 'alternative to gsap', '19')
+        +skill('framer-motion', 'framer-motion... alternative to gsap', '19')
         +skill('lottie', 'integrate complex after effects animations into JS', '17')
     h1(id='projects-title') Projects 
     section(id='projects')
-        +project('https://www.rachelnoelle.net', 1, 'Rachel Noelle', 'Proj - 01', 'eCommerce/Coaching', 'NextJS application allowing my client to sell their own art as well as coaching programs. Features CRUD to a supabase backend, client emails, OAuthentication, user authorization, Stripe eccommerce with webhooks and more.', "rachelnoelles.mp4", ["next.js", "framer.motion", "tailwind.css", "supabase"])
-        +project('/', 2, 'Name', 'Proj - 02', 'Type', "Description to the second project", "", ['tailwind.css'])
-        +project('/', 3, 'Name', 'Proj - 03', 'Type', "Description to the third project", "", ['tailwind.css'])
+        +project('https://www.rachelnoelle.net', 1, 'Rachel Noelle', 'Proj - 01', 'eCommerce/Coaching', 'NextJS application allowing my client to sell their own art as well as coaching programs. Features CRUD to a supabase backend, client emails, OAuthentication, user authorization, Stripe eccommerce with webhooks, advanced form handling and more.', "rn-commerce-desktop.mp4", "rn-commerce-mobile.mp4", ["next.js", "framer.motion", "tailwind.css", "supabase"])
+        +project('/', 2, 'Name', 'Proj - 02', 'Type', "Description to the second project", "", "", ['tailwind.css'])
+        +project('/', 3, 'Name', 'Proj - 03', 'Type', "Description to the third project", "", "", ['tailwind.css'])

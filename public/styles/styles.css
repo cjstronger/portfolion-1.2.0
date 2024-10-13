@@ -317,6 +317,9 @@ ul {
 .project-tile:nth-child(2) {
   transform: rotateY(180deg);
 }
+.project-tile:nth-child(2) video {
+  transform: rotateY(180deg) !important;
+}
 .project-tile:nth-child(2) .project-split,
 .project-tile:nth-child(2) .project-skill,
 .project-tile:nth-child(2) .project-number {

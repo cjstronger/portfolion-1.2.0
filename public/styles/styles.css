@@ -384,6 +384,7 @@ ul {
 .site-link:hover {
   color: #00ff99 !important;
   transition: color 0.2s ease-in !important;
+  cursor: pointer;
 }
 .project-number {
   font-size: 500px;

@@ -109,7 +109,7 @@ body {
 
 #navbar a {
   position: relative;
-  width: 100px;
+  width: 120px;
   height: 45px;
   text-align: center;
   text-decoration: none;
@@ -124,6 +124,7 @@ body {
 }
 .project-btn {
   background-color: #00ff99 !important;
+  width: 130px !important;
 }
 .contact-btn::before {
   content: "contact";
@@ -531,8 +532,8 @@ ul {
   }
   .contact-links {
     min-width: 100px;
+    width: 35vw;
     padding: 10px 5px;
-    font-size: 20px;
     border-width: 2px;
   }
 
@@ -541,28 +542,23 @@ ul {
   }
 
   #navbar a {
-    font-size: e 12px;
-    width: 60px;
-    height: 25px;
+    font-size: 12px !important;
+    width: 80px;
+    height: 30px;
+  }
+  .project-btn {
+    width: 85px !important;
   }
 
-  .contact-btn::before {
-    top: -14px;
-    left: 8px;
+  #navbar a:hover::before {
+    transform: translateY(0px);
   }
-
-  .contact-btn::after {
-    top: 3px;
-    left: 8px;
-  }
-
-  .project-btn::before {
-    top: -18px;
-    left: 6px;
+  #navbar a:hover::after {
+    transform: translateY(0px);
   }
 
   #contact p {
-    font-size: 12px;
+    font-size: 3vw;
   }
 
   #contact p span {
@@ -588,35 +584,41 @@ ul {
   }
 
   .skills {
-    height: 100% !important;
+    overflow: scroll;
+    height: 300px !important;
     flex-direction: column;
     margin-bottom: 20px;
+    padding-top: 300px;
   }
   .skill-tile {
     width: 100%;
-    height: 30px;
+    height: 60px !important;
     position: relative;
     padding: 0px 30px;
+    overflow: visible;
+    display: flex;
+    justify-content: space-between;
   }
   .skill-tile:hover {
     width: 100%;
   }
   .skill-name {
     writing-mode: horizontal-tb;
-    font-size: 4.8vw;
     white-space: nowrap;
+    font-size: 30px;
   }
   .skill-description {
-    margin-top: 0px;
+    position: relative;
     writing-mode: horizontal-tb;
-    font-size: 1vw;
+    width: 100%;
+    font-size: 8px;
+    text-align: center;
+    transform: translateY(10px);
   }
   .skill-year {
     writing-mode: horizontal-tb;
-    font-size: 3vw;
-    right: 100px;
-    top: 0px;
-    position: absolute;
+    margin: 0;
+    font-size: 15px;
   }
 
   .project-number {
@@ -682,6 +684,12 @@ ul {
   }
   .project-tile:hover .video {
     display: none !important;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .skill-description {
+    font-size: 5px;
   }
 }
 .button {

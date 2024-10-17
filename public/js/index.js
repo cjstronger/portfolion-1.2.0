@@ -258,3 +258,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+if (window.innerWidth < 1001) {
+  window.addEventListener("DOMContentLoaded", () => {
+    handleSkillTiles();
+  });
+}
+
+function handleSkillTiles() {
+  const skillTiles = document.querySelectorAll(".skill-tile");
+  const skillTilesArray = Array.from(skillTiles);
+
+  skillTilesArray.forEach((skill, i) => {
+    gsap.to(skill, {
+      scrollTrigger: {
+        trigger: skill,
+        start: "top center",
+        end: "bottom top",
+        markers: true,
+      },
+      height: 80,
+      duration: 0.5,
+      delay: i * 0.15,
+    });
+  });
+}
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth < 1001) {
+    handleSkillTiles();
+  }
+});

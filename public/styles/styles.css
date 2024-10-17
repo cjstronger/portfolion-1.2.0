@@ -589,37 +589,34 @@ ul {
 
   .skills {
     height: 100% !important;
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    flex-direction: column;
     margin-bottom: 20px;
   }
   .skill-tile {
-    width: 30vw;
-    height: 30vw;
+    width: 100%;
+    height: 30px;
+    position: relative;
+    padding: 0px 30px;
   }
   .skill-tile:hover {
-    width: 30vw;
+    width: 100%;
   }
   .skill-name {
     writing-mode: horizontal-tb;
     font-size: 4.8vw;
-    transform: translateY(var(--translate));
     white-space: nowrap;
   }
   .skill-description {
-    position: block;
     margin-top: 0px;
     writing-mode: horizontal-tb;
     font-size: 1vw;
   }
   .skill-year {
     writing-mode: horizontal-tb;
-    font-size: 2vw;
-    margin-top: 0px;
-    margin-left: 0px;
-    width: 90%;
-    transform: translateX(var(--translate)) translateY(var(--translateY));
+    font-size: 3vw;
+    right: 100px;
+    top: 0px;
+    position: absolute;
   }
 
   .project-number {

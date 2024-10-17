@@ -275,7 +275,6 @@ function handleSkillTiles() {
         trigger: skill,
         start: "top center",
         end: "bottom top",
-        markers: true,
       },
       height: 80,
       duration: 0.5,
